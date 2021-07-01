@@ -2,8 +2,10 @@ package com.udemy.compras.component.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.udemy.compras.input.ClienteInput;
 import com.udemy.compras.model.Cliente;
 import com.udemy.compras.service.ClienteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +25,10 @@ public class ClienteGraphQL implements GraphQLQueryResolver, GraphQLMutationReso
         return service.findAll();
     }
 
-    public Cliente saveCliente(Long id, String nome, String email) {
-        return service.save(new Cliente(id, nome, email));
+    public Cliente saveCliente(ClienteInput input) {
+        ModelMapper mapper = new ModelMapper();
+        Cliente cliente = mapper.map(input, Cliente.class);
+        return service.save(cliente);
     }
 
     public Boolean deleteCliente(Long id) {

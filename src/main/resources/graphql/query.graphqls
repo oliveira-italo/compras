@@ -1,3 +1,9 @@
+#declaração de schema padrão, é possível alterar o schema padrão de query, mutation e subscription
+#schema {
+#    query: Query
+#    mutation: Mutation
+#}
+
 type Query {
     hello:String
     soma(a:Int, b:Int):Int
