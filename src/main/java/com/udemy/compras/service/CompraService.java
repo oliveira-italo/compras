@@ -1,9 +1,12 @@
 package com.udemy.compras.service;
 
+import com.udemy.compras.dto.CompraResumo;
 import com.udemy.compras.model.Cliente;
 import com.udemy.compras.model.Compra;
 import com.udemy.compras.repository.CompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,8 +18,8 @@ public class CompraService {
     @Autowired
     private CompraRepository repository;
 
-    public List<Compra> findAll() {
-        return repository.findAll();
+    public Page<Compra> findAll(PageRequest pageable) {
+        return repository.findAll(pageable);
     }
 
     public Compra find(Long id) {
@@ -40,5 +43,13 @@ public class CompraService {
 
     public List<Compra> findAllByCliente(Cliente cliente) {
         return repository.findAllByCliente(cliente);
+    }
+
+    public List<Compra> findAllByClienteAndQuantidade(Cliente cliente, int quantidade) {
+        return repository.findAllByClienteAndQuantidade(cliente, quantidade);
+    }
+
+    public List<CompraResumo> findAllComprasResumo() {
+        return repository.findAllComprasResumo();
     }
 }
