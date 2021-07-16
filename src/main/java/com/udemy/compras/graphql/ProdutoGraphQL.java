@@ -1,4 +1,4 @@
-package com.udemy.compras.component.graphql;
+package com.udemy.compras.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
@@ -27,7 +27,7 @@ public class ProdutoGraphQL implements GraphQLQueryResolver, GraphQLMutationReso
     }
 
     public Produto produto(Long id) {
-        return service.read(id);
+        return service.findById(id);
     }
 
     public boolean deleteProduto(Long id) {

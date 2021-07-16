@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
+@Service("cliente-service")
 public class ClienteService {
 
     @Autowired
     private ClienteRepository repository;
 
-    public Cliente find(Long id) {
+    public Cliente findById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -29,13 +29,11 @@ public class ClienteService {
 
     @Transactional
     public Boolean delete(Long id) {
-        if(repository.findById(id).isPresent()) {
+        if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
             return true;
         } else {
             return false;
         }
     }
-
-
 }

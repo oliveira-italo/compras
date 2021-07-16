@@ -1,4 +1,4 @@
-package com.udemy.compras.component.graphql;
+package com.udemy.compras.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
@@ -18,7 +18,7 @@ public class ClienteGraphQL implements GraphQLQueryResolver, GraphQLMutationReso
     private ClienteService service;
 
     public Cliente cliente(Long id) {
-        return service.find(id);
+        return service.findById(id);
     }
 
     public List<Cliente> clientes() {

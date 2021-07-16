@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("produto-service")
 public class ProdutoService {
 
     @Autowired
@@ -17,7 +17,7 @@ public class ProdutoService {
         return repository.findAll();
     }
 
-    public Produto read(Long id) {
+    public Produto findById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
