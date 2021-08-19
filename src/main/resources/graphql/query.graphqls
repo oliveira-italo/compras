@@ -4,6 +4,8 @@
 #    mutation: Mutation
 #}
 
+scalar Date
+
 type Query {
     hello:String
     soma(a:Int, b:Int):Int

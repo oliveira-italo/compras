@@ -4,6 +4,7 @@ type Compra {
     status:String!
     cliente:Cliente!
     produto:Produto!
+    data:Date!
 }
 
 input CompraInput {
