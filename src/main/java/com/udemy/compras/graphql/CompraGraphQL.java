@@ -3,6 +3,7 @@ package com.udemy.compras.graphql;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.udemy.compras.dto.CompraResumo;
+import com.udemy.compras.exception.CompraInvalidaPorQuantidadeException;
 import com.udemy.compras.input.CompraInput;
 import com.udemy.compras.model.Compra;
 import com.udemy.compras.service.CompraService;
@@ -32,6 +33,9 @@ public class CompraGraphQL implements GraphQLQueryResolver, GraphQLMutationResol
     }
 
     public Compra saveCompra(CompraInput input) {
+        if(input.getQuantidade() > 100) {
+            throw new CompraInvalidaPorQuantidadeException(input.getQuantidade());
+        }
         return service.saveCompra(input.toEntity());
     }
 
