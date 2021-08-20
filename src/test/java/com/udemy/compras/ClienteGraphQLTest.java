@@ -29,7 +29,6 @@ public class ClienteGraphQLTest extends GraphQLTestTemplate {
         assertTrue(response.isOk());
 
         String json = response.getRawResponse().getBody();
-        System.out.println(json);
 
         JSONArray jsonArray = new JSONObject(json).getJSONObject("data").getJSONArray("clientes");
         System.out.print(jsonArray);
