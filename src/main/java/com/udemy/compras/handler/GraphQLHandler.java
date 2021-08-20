@@ -7,6 +7,9 @@ import graphql.GraphQLError;
 import graphql.servlet.GenericGraphQLError;
 import graphql.servlet.GraphQLErrorHandler;
 import graphql.validation.ValidationError;
+import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +18,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class GraphQLHandler implements GraphQLErrorHandler {
+
+    @Autowired
+    private Environment environment;
 
     @Override
     public List<GraphQLError> processErrors(List<GraphQLError> list) {
@@ -27,7 +33,14 @@ public class GraphQLHandler implements GraphQLErrorHandler {
                 String message = ((ExceptionWhileDataFetching) error).getException().getMessage();
                 return new SimpleError(message);
             }
-            
+
+            String[] profiles = environment.getActiveProfiles();
+            boolean isDev = ArrayUtils.contains(profiles, "dev");
+            if(!isDev) {
+                return new SimpleError("Ocorreu um erro ao processar a transação");
+            }
+
+
         } else if (error instanceof ValidationError) {
             return new SimpleError(error.getMessage());
         }
